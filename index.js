@@ -1,9 +1,8 @@
-
 const inquirer = require("inquirer");
 const fs = require('fs');
 
-  inquirer 
-    .prompt([
+// Questions for user input
+const questions = [
         {
             type: 'input',
             message: 'What is your GitHub username?',
@@ -28,93 +27,97 @@ const fs = require('fs');
             type: 'input',
             message: 'what kind of license should your project have?',
             name: 'license',
+            choices: ['MIT', 'APACHE 2.0', 'GPL 3.0', 'BSD 3', 'None'],
         },
         {
             type: 'input',
             message: 'what command should be run to install the dependencies?',
             name: 'installation',
+            default: 'npm install'
         },
         {
             type: 'input',
             message: 'what command should be run to run tests?',
             name: 'tests',
+            default: 'npm test'
         },
         {
             type: 'input',
-            message: 'what does the users need to know about using your repository?',
+            message: 'what does the users need to know about using the repository?',
             name: 'usage',
         },
         {
             type: 'input',
-            message: 'what does the users need to know about contributiong to your repository?',
+            message: 'what does the users need to know about contributiong to the repository?',
             name: 'contribution',
         },
+    ];
         
         
-    ]) 
-    .then(response => {
-    
-        fs.writeFile('README.html', HTMLPart(response), err => {
-            if (err) throw err;
-            console.log('sucess');
-            
-            
-        });
+    // Function to write README file
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, err => {
+        if (err) throw err;
+        console.log('Success!');
     });
-    
+}
 
     
-    <h2>${response.name}</h2>
-    function HTMLPart(response) {
+//Function to generate markdown for README
+    function generateMarkdown(response) {
         return `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>readme</title>
-        </head>s
-        <body> 
-        
-        <!-- readme -->
-        <h2>Description</h2>
-        <p>${response.description}</p>
-        <h2>Table of contents</h2>
-        <p>•<a href="${response.installation}"</a></p>
-        <h2>Installation</h2>
-        <p>To install the necessary dependencies, run the following command:</p>
-        <p>${response.iinstallation}</p>
-        <p>•<a href="${response.installation}"</a></p>
-        <p>•<a href="${response.usage}"</a></p>
-        <p>•<a href="${response.license}"</a></p>
-        <p>•<a href="${response.contribution}"</a></p>
-        <p>•<a href="${response.tests}"</a></p>
-        <p>•<a href="${Questions}"</a></p>
-        <h2>Usage</h2>
-        <p>${response.usage}</p>
-        <h2>Licence</h2>
-        <p>This project is licensed under the ${response.license}</p>
-        <h2>Contribution</h2>
-        <p>${response.contribution}</p>
-        <h2>Tests</h2>
-        <p>To run tests, use the following command:</p>
-        <p>${response.tests}</p>
-        <h2>Questions</h2>
-        <p>If you have any questions, please contact me via ${response.email}</p>
-        <p>youcan find and visit my works on github ${response.github}</p>
-        
-        </body>
-        </html>`;
- 
-     }
-        
-       
-       
-        
-        
-                
-         
-       
+        # ${response.title}
+
+## Description
+${response.description}
+
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#questions)
+
+## Installation
+To install the necessary dependencies, run the following command:
+\`\`\`
+${response.installation}
+\`\`\`
+
+## Usage
+${response.usage}
+
+## License
+This project is licensed under the ${response.license} license.
+
+## Contributing
+${response.contribution}
+
+## Tests
+To run tests, use the following command:
+\`\`\`
+${response.tests}
+\`\`\`
+
+## Questions
+If you have any questions, please contact me via email at [${response.email}](mailto:${response.email}). 
+You can find more of my work on GitHub at [${response.github}](https://github.com/${response.github}).
+`;
+}
+
+// Function to initialize app
+function init() {
+    inquirer.prompt(questions)
+        .then(response => {
+            const markdownContent = generateMarkdown(response);
+            writeToFile('README.md', markdownContent);
+        });
+}
+
+// Function call to initialize app
+init();
+  
        
            
     
