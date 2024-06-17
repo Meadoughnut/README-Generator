@@ -56,7 +56,7 @@ const questions = [
   ];
    
 
-// Function to write README file
+// Function to write sampleREADME file
 function writeToFile(fileName, data) {
   fs.writeFile(fileName, data, (err) => {
     if (err) {
@@ -72,7 +72,7 @@ function init() {
   inquirer.prompt(questions)
     .then((answers) => {
       const markdownContent = generateMarkdown(answers);
-      writeToFile('README.md', markdownContent);
+      writeToFile('sampleREADME.md', markdownContent);
     })
     .catch((error) => {
       console.error('Error occurred:', error);

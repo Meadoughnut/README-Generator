@@ -14,7 +14,8 @@ function renderLicenseLink(license) {
     return '';
   }
 }
-// Function to generate the license section of the README
+// Function to generate the license section of the Samplereadme
+
 function renderLicenseSection(license) {
   if (license) {
     return `## License
@@ -23,7 +24,8 @@ This project is licensed under the [${license}](${renderLicenseLink(license)}) L
         return '';
       }
     }
-    // Function to generate markdown for README
+    // Function to generate markdown for Samplereadme
+    
     function generateMarkdown(data) {
       return `
 # ${data.title}
@@ -57,7 +59,7 @@ ${data.usage}
 
 ## Contributing
 
-${data.contributing}
+${data.contribution}
 
 ## Tests
 
