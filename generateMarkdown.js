@@ -23,6 +23,58 @@ function renderLicenseSection(license) {
         return '';
       }
     }
+    // Function to generate markdown for README
+    function generateMarkdown(data) {
+      return `
+     # ${data.title}
+    
+    ${renderLicenseBadge(data.license)}
+    
+    ## Description
+    ${data.description}
+    
+    
+    ## Table of Contents
+    
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [License](#license)
+    - [Contributing](#contributing)
+    - [Tests](#tests)
+    - [Questions](#questions)
+    
+    ## Installation
+    ## Installation
+    
+    To install the necessary dependencies, run the following command:
+    
+    ${data.installation}
+    
+    
+    ## Usage
+    
+    ${data.usage}
+    
+    ## Contributing
+    
+    ${data.contributing}
+    
+    ## Tests
+    
+    ${data.tests}
+    
+    ## Questions
+    
+    If you have any questions, please contact me via email at [${data.email}](mailto:${data.email}). 
+    You can find more of my work on GitHub at [${data.github}](https://github.com/${data.github}).
+    
+    ${renderLicenseSection(data.license)}
+    `;
+    }
+    
+    module.exports = generateMarkdown;
+    
+
   
     
 
@@ -30,58 +82,6 @@ function renderLicenseSection(license) {
 
 
 
-
-// Function to generate markdown for README
-function generateMarkdown(data) {
-  return `
- # ${data.title}
-
-${renderLicenseBadge(data.license)}
-
-## Description
-${data.description}
-
-
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [License](#license)
-- [Contributing](#contributing)
-- [Tests](#tests)
-- [Questions](#questions)
-
-## Installation
-## Installation
-
-To install the necessary dependencies, run the following command:
-
-${data.installation}
-
-
-## Usage
-
-${data.usage}
-
-## Contributing
-
-${data.contributing}
-
-## Tests
-
-${data.tests}
-
-## Questions
-
-If you have any questions, please contact me via email at [${response.email}](mailto:${response.email}). 
-You can find more of my work on GitHub at [${response.github}](https://github.com/${response.github}).
-
-${renderLicenseSection(data.license)}
-`;
-}
-
-module.exports = generateMarkdown;
-
-
+    
 
 
